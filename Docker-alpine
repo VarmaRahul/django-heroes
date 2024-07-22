@@ -3,7 +3,7 @@ FROM python:3.12-alpine
 RUN rm -rf /var/lib/apt/lists/*
 
 WORKDIR /usr/src/app
-COPY requirements.txt .
+COPY my-project/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 ENV PYTHONUNBUFFERED 1
