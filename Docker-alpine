@@ -3,10 +3,10 @@ FROM python:3.12-alpine
 RUN rm -rf /var/lib/apt/lists/*
 
 WORKDIR /usr/src/app
-COPY my-project/requirements.txt .
+COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-ENV PYTHONUNBUFFERED 1
+ENV PYTHONUNBUFFERED=1
 COPY ./my-project .
 
 EXPOSE 8000
