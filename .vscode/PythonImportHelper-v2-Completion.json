@@ -212,7 +212,7 @@
         "kind": 5,
         "importPath": "myproject.myproject.settings",
         "description": "myproject.myproject.settings",
-        "peekOfCode": "BASE_DIR = Path(__file__).resolve().parent.parent\n# Quick-start development settings - unsuitable for production\n# See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/\n# SECURITY WARNING: keep the secret key used in production secret!\nSECRET_KEY = 'django-insecure-)0g+3u!dbmjj#)v_f3s4f^g*iwb#*e6^axhq1q$!3y#rxz6g1g'\n# SECURITY WARNING: don't run with debug turned on in production!\nDEBUG = False\nALLOWED_HOSTS = [\"*\"]\n# Application definition\nINSTALLED_APPS = [",
+        "peekOfCode": "BASE_DIR = Path(__file__).resolve().parent.parent\n# Quick-start development settings - unsuitable for production\n# See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/\n# SECURITY WARNING: keep the secret key used in production secret!\nSECRET_KEY = 'django-insecure-)0g+3u!dbmjj#)v_f3s4f^g*iwb#*e6^axhq1q$!3y#rxz6g1g'\n# SECURITY WARNING: don't run with debug turned on in production!\nDEBUG = True\nALLOWED_HOSTS = [\"*\"]\n# Application definition\nINSTALLED_APPS = [",
         "detail": "myproject.myproject.settings",
         "documentation": {}
     },
@@ -221,7 +221,7 @@
         "kind": 5,
         "importPath": "myproject.myproject.settings",
         "description": "myproject.myproject.settings",
-        "peekOfCode": "SECRET_KEY = 'django-insecure-)0g+3u!dbmjj#)v_f3s4f^g*iwb#*e6^axhq1q$!3y#rxz6g1g'\n# SECURITY WARNING: don't run with debug turned on in production!\nDEBUG = False\nALLOWED_HOSTS = [\"*\"]\n# Application definition\nINSTALLED_APPS = [\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',\n    'django.contrib.sessions',",
+        "peekOfCode": "SECRET_KEY = 'django-insecure-)0g+3u!dbmjj#)v_f3s4f^g*iwb#*e6^axhq1q$!3y#rxz6g1g'\n# SECURITY WARNING: don't run with debug turned on in production!\nDEBUG = True\nALLOWED_HOSTS = [\"*\"]\n# Application definition\nINSTALLED_APPS = [\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',\n    'django.contrib.sessions',",
         "detail": "myproject.myproject.settings",
         "documentation": {}
     },
@@ -230,7 +230,7 @@
         "kind": 5,
         "importPath": "myproject.myproject.settings",
         "description": "myproject.myproject.settings",
-        "peekOfCode": "DEBUG = False\nALLOWED_HOSTS = [\"*\"]\n# Application definition\nINSTALLED_APPS = [\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',\n    'django.contrib.sessions',\n    'django.contrib.messages',\n    'django.contrib.staticfiles',",
+        "peekOfCode": "DEBUG = True\nALLOWED_HOSTS = [\"*\"]\n# Application definition\nINSTALLED_APPS = [\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',\n    'django.contrib.sessions',\n    'django.contrib.messages',\n    'django.contrib.staticfiles',",
         "detail": "myproject.myproject.settings",
         "documentation": {}
     },
@@ -266,7 +266,7 @@
         "kind": 5,
         "importPath": "myproject.myproject.settings",
         "description": "myproject.myproject.settings",
-        "peekOfCode": "ROOT_URLCONF = 'myproject.urls'\nTEMPLATES = [\n    {\n        'BACKEND': 'django.template.backends.django.DjangoTemplates',\n        'DIRS': [],\n        'APP_DIRS': True,\n        'OPTIONS': {\n            'context_processors': [\n                'django.template.context_processors.debug',\n                'django.template.context_processors.request',",
+        "peekOfCode": "ROOT_URLCONF = 'myproject.urls'\nTEMPLATES = [\n    {\n        'BACKEND': 'django.template.backends.django.DjangoTemplates',\n        'DIRS': ['templates'],\n        'APP_DIRS': True,\n        'OPTIONS': {\n            'context_processors': [\n                'django.template.context_processors.debug',\n                'django.template.context_processors.request',",
         "detail": "myproject.myproject.settings",
         "documentation": {}
     },
@@ -275,7 +275,7 @@
         "kind": 5,
         "importPath": "myproject.myproject.settings",
         "description": "myproject.myproject.settings",
-        "peekOfCode": "TEMPLATES = [\n    {\n        'BACKEND': 'django.template.backends.django.DjangoTemplates',\n        'DIRS': [],\n        'APP_DIRS': True,\n        'OPTIONS': {\n            'context_processors': [\n                'django.template.context_processors.debug',\n                'django.template.context_processors.request',\n                'django.contrib.auth.context_processors.auth',",
+        "peekOfCode": "TEMPLATES = [\n    {\n        'BACKEND': 'django.template.backends.django.DjangoTemplates',\n        'DIRS': ['templates'],\n        'APP_DIRS': True,\n        'OPTIONS': {\n            'context_processors': [\n                'django.template.context_processors.debug',\n                'django.template.context_processors.request',\n                'django.contrib.auth.context_processors.auth',",
         "detail": "myproject.myproject.settings",
         "documentation": {}
     },
@@ -320,7 +320,7 @@
         "kind": 5,
         "importPath": "myproject.myproject.settings",
         "description": "myproject.myproject.settings",
-        "peekOfCode": "TIME_ZONE = 'Asia/Kolkata'\nUSE_I18N = True\nUSE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/5.0/howto/static-files/\nSTATIC_URL = 'avengers/static/'\nSTATICFILES_DIRS = [\n    BASE_DIR / \"avengers/static\",\n]\n# Default primary key field type",
+        "peekOfCode": "TIME_ZONE = 'Asia/Kolkata'\nUSE_I18N = True\nUSE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/5.0/howto/static-files/\nSTATIC_URL = 'avengers/static/'\nSTATICFILES_DIRS = [\n    BASE_DIR / \"avengers/static\",\n]\nSTATICFILES_DIRS = [",
         "detail": "myproject.myproject.settings",
         "documentation": {}
     },
@@ -329,7 +329,7 @@
         "kind": 5,
         "importPath": "myproject.myproject.settings",
         "description": "myproject.myproject.settings",
-        "peekOfCode": "USE_I18N = True\nUSE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/5.0/howto/static-files/\nSTATIC_URL = 'avengers/static/'\nSTATICFILES_DIRS = [\n    BASE_DIR / \"avengers/static\",\n]\n# Default primary key field type\n# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field",
+        "peekOfCode": "USE_I18N = True\nUSE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/5.0/howto/static-files/\nSTATIC_URL = 'avengers/static/'\nSTATICFILES_DIRS = [\n    BASE_DIR / \"avengers/static\",\n]\nSTATICFILES_DIRS = [\n    BASE_DIR / 'avengers/static',",
         "detail": "myproject.myproject.settings",
         "documentation": {}
     },
@@ -338,7 +338,7 @@
         "kind": 5,
         "importPath": "myproject.myproject.settings",
         "description": "myproject.myproject.settings",
-        "peekOfCode": "USE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/5.0/howto/static-files/\nSTATIC_URL = 'avengers/static/'\nSTATICFILES_DIRS = [\n    BASE_DIR / \"avengers/static\",\n]\n# Default primary key field type\n# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'",
+        "peekOfCode": "USE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/5.0/howto/static-files/\nSTATIC_URL = 'avengers/static/'\nSTATICFILES_DIRS = [\n    BASE_DIR / \"avengers/static\",\n]\nSTATICFILES_DIRS = [\n    BASE_DIR / 'avengers/static',\n]",
         "detail": "myproject.myproject.settings",
         "documentation": {}
     },
@@ -347,7 +347,7 @@
         "kind": 5,
         "importPath": "myproject.myproject.settings",
         "description": "myproject.myproject.settings",
-        "peekOfCode": "STATIC_URL = 'avengers/static/'\nSTATICFILES_DIRS = [\n    BASE_DIR / \"avengers/static\",\n]\n# Default primary key field type\n# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'",
+        "peekOfCode": "STATIC_URL = 'avengers/static/'\nSTATICFILES_DIRS = [\n    BASE_DIR / \"avengers/static\",\n]\nSTATICFILES_DIRS = [\n    BASE_DIR / 'avengers/static',\n]\n# Default primary key field type\n# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'",
         "detail": "myproject.myproject.settings",
         "documentation": {}
     },
@@ -356,7 +356,16 @@
         "kind": 5,
         "importPath": "myproject.myproject.settings",
         "description": "myproject.myproject.settings",
-        "peekOfCode": "STATICFILES_DIRS = [\n    BASE_DIR / \"avengers/static\",\n]\n# Default primary key field type\n# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'",
+        "peekOfCode": "STATICFILES_DIRS = [\n    BASE_DIR / \"avengers/static\",\n]\nSTATICFILES_DIRS = [\n    BASE_DIR / 'avengers/static',\n]\n# Default primary key field type\n# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'",
+        "detail": "myproject.myproject.settings",
+        "documentation": {}
+    },
+    {
+        "label": "STATICFILES_DIRS",
+        "kind": 5,
+        "importPath": "myproject.myproject.settings",
+        "description": "myproject.myproject.settings",
+        "peekOfCode": "STATICFILES_DIRS = [\n    BASE_DIR / 'avengers/static',\n]\n# Default primary key field type\n# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'",
         "detail": "myproject.myproject.settings",
         "documentation": {}
     },

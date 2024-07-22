@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-)0g+3u!dbmjj#)v_f3s4f^g*iwb#*e6^axhq1q$!3y#rxz6g1g'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
@@ -55,7 +55,7 @@ ROOT_URLCONF = 'myproject.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -120,6 +120,10 @@ STATIC_URL = 'avengers/static/'
 
 STATICFILES_DIRS = [
     BASE_DIR / "avengers/static",
+]
+
+STATICFILES_DIRS = [
+    BASE_DIR / 'avengers/static',
 ]
 
 # Default primary key field type
