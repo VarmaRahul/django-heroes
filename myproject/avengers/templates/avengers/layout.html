@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}
+        <title>Layput Page</title>
+    {% endblock %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="shortcut icon" href="{% static 'favicon.ico.png' %}" type="image/x-icon">
+</head>
+{% block content %}
+<body>
+    <div>
+        <p>This is layout page</p>
+    </div>
+</body>
+
+{% endblock %}
+</html>
+
+
+
+
+

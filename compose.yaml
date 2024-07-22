@@ -1,0 +1,12 @@
+services:
+  django-blog:
+    build:
+      context: .
+      dockerfile: Docker-alpine
+    image: my_django_app:latest
+    container_name: django_web_app
+    ports:
+      - "80:8000"
+    environment:
+      - DEBUG=True
+      - PYTHONUNBUFFERED=1
