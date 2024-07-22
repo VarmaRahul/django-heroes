@@ -1,5 +1,5 @@
 services:
-  django-blog:
+  django-heroes:
     build:
       context: .
       dockerfile: Docker-alpine
