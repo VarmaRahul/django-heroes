@@ -119,7 +119,7 @@ USE_TZ = True
 STATIC_URL = 'avengers/static/'
 
 STATICFILES_DIRS = [
-    BASE_DIR / "avengers/static",
+    BASE_DIR / "avengers/static/",
 ]
 
 
