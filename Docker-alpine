@@ -8,6 +8,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 ENV PYTHONUNBUFFERED=1
 COPY ./myproject .
+RUN chmod -R 755 /usr/src/app
 
 EXPOSE 8000
 ENTRYPOINT ["python", "manage.py"]

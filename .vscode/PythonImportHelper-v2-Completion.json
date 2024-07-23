@@ -311,7 +311,7 @@
         "kind": 5,
         "importPath": "myproject.myproject.settings",
         "description": "myproject.myproject.settings",
-        "peekOfCode": "LANGUAGE_CODE = 'en-us'\nTIME_ZONE = 'Asia/Kolkata'\nUSE_I18N = True\nUSE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/5.0/howto/static-files/\nSTATIC_URL = 'avengers/static/'\nSTATICFILES_DIRS = [\n    BASE_DIR / \"avengers/static\",\n]",
+        "peekOfCode": "LANGUAGE_CODE = 'en-us'\nTIME_ZONE = 'Asia/Kolkata'\nUSE_I18N = True\nUSE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/5.0/howto/static-files/\nSTATIC_URL = '/avengers/static/'\nSTATICFILES_DIRS = [\n    BASE_DIR / \"/avengers/static\",\n]",
         "detail": "myproject.myproject.settings",
         "documentation": {}
     },
@@ -320,7 +320,7 @@
         "kind": 5,
         "importPath": "myproject.myproject.settings",
         "description": "myproject.myproject.settings",
-        "peekOfCode": "TIME_ZONE = 'Asia/Kolkata'\nUSE_I18N = True\nUSE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/5.0/howto/static-files/\nSTATIC_URL = 'avengers/static/'\nSTATICFILES_DIRS = [\n    BASE_DIR / \"avengers/static\",\n]\nSTATICFILES_DIRS = [",
+        "peekOfCode": "TIME_ZONE = 'Asia/Kolkata'\nUSE_I18N = True\nUSE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/5.0/howto/static-files/\nSTATIC_URL = '/avengers/static/'\nSTATICFILES_DIRS = [\n    BASE_DIR / \"/avengers/static\",\n]\n# Default primary key field type",
         "detail": "myproject.myproject.settings",
         "documentation": {}
     },
@@ -329,7 +329,7 @@
         "kind": 5,
         "importPath": "myproject.myproject.settings",
         "description": "myproject.myproject.settings",
-        "peekOfCode": "USE_I18N = True\nUSE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/5.0/howto/static-files/\nSTATIC_URL = 'avengers/static/'\nSTATICFILES_DIRS = [\n    BASE_DIR / \"avengers/static\",\n]\nSTATICFILES_DIRS = [\n    BASE_DIR / 'avengers/static',",
+        "peekOfCode": "USE_I18N = True\nUSE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/5.0/howto/static-files/\nSTATIC_URL = '/avengers/static/'\nSTATICFILES_DIRS = [\n    BASE_DIR / \"/avengers/static\",\n]\n# Default primary key field type\n# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field",
         "detail": "myproject.myproject.settings",
         "documentation": {}
     },
@@ -338,7 +338,7 @@
         "kind": 5,
         "importPath": "myproject.myproject.settings",
         "description": "myproject.myproject.settings",
-        "peekOfCode": "USE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/5.0/howto/static-files/\nSTATIC_URL = 'avengers/static/'\nSTATICFILES_DIRS = [\n    BASE_DIR / \"avengers/static\",\n]\nSTATICFILES_DIRS = [\n    BASE_DIR / 'avengers/static',\n]",
+        "peekOfCode": "USE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/5.0/howto/static-files/\nSTATIC_URL = '/avengers/static/'\nSTATICFILES_DIRS = [\n    BASE_DIR / \"/avengers/static\",\n]\n# Default primary key field type\n# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'",
         "detail": "myproject.myproject.settings",
         "documentation": {}
     },
@@ -347,7 +347,7 @@
         "kind": 5,
         "importPath": "myproject.myproject.settings",
         "description": "myproject.myproject.settings",
-        "peekOfCode": "STATIC_URL = 'avengers/static/'\nSTATICFILES_DIRS = [\n    BASE_DIR / \"avengers/static\",\n]\nSTATICFILES_DIRS = [\n    BASE_DIR / 'avengers/static',\n]\n# Default primary key field type\n# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'",
+        "peekOfCode": "STATIC_URL = '/avengers/static/'\nSTATICFILES_DIRS = [\n    BASE_DIR / \"/avengers/static\",\n]\n# Default primary key field type\n# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'",
         "detail": "myproject.myproject.settings",
         "documentation": {}
     },
@@ -356,16 +356,7 @@
         "kind": 5,
         "importPath": "myproject.myproject.settings",
         "description": "myproject.myproject.settings",
-        "peekOfCode": "STATICFILES_DIRS = [\n    BASE_DIR / \"avengers/static\",\n]\nSTATICFILES_DIRS = [\n    BASE_DIR / 'avengers/static',\n]\n# Default primary key field type\n# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'",
-        "detail": "myproject.myproject.settings",
-        "documentation": {}
-    },
-    {
-        "label": "STATICFILES_DIRS",
-        "kind": 5,
-        "importPath": "myproject.myproject.settings",
-        "description": "myproject.myproject.settings",
-        "peekOfCode": "STATICFILES_DIRS = [\n    BASE_DIR / 'avengers/static',\n]\n# Default primary key field type\n# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'",
+        "peekOfCode": "STATICFILES_DIRS = [\n    BASE_DIR / \"/avengers/static\",\n]\n# Default primary key field type\n# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'",
         "detail": "myproject.myproject.settings",
         "documentation": {}
     },
