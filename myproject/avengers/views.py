@@ -7,3 +7,8 @@ def heros(request):
     hero = Avengers.objects.all().order_by('id')
 
     return render(request, 'avengers/heros.html', {'hero': hero})
+
+
+def layout(request):
+    #returns the layout page
+    return render(request, 'avengers/layout.html')

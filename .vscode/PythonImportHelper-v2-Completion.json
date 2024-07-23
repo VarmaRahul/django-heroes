@@ -185,7 +185,7 @@
         "kind": 5,
         "importPath": "myproject.avengers.urls",
         "description": "myproject.avengers.urls",
-        "peekOfCode": "urlpatterns = [\n    path('', views.heros),\n]",
+        "peekOfCode": "urlpatterns = [\n    path('', views.heros),\n    path('layout/', views.layout),\n]",
         "detail": "myproject.avengers.urls",
         "documentation": {}
     },
@@ -194,7 +194,16 @@
         "kind": 2,
         "importPath": "myproject.avengers.views",
         "description": "myproject.avengers.views",
-        "peekOfCode": "def heros(request):\n    hero = Avengers.objects.all().order_by('id')\n    return render(request, 'avengers/heros.html', {'hero': hero})",
+        "peekOfCode": "def heros(request):\n    hero = Avengers.objects.all().order_by('id')\n    return render(request, 'avengers/heros.html', {'hero': hero})\ndef layout(request):\n    #returns the layout page\n    return render(request, 'avengers/layout.html')",
+        "detail": "myproject.avengers.views",
+        "documentation": {}
+    },
+    {
+        "label": "layout",
+        "kind": 2,
+        "importPath": "myproject.avengers.views",
+        "description": "myproject.avengers.views",
+        "peekOfCode": "def layout(request):\n    #returns the layout page\n    return render(request, 'avengers/layout.html')",
         "detail": "myproject.avengers.views",
         "documentation": {}
     },
