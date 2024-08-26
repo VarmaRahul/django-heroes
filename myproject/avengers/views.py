@@ -3,10 +3,10 @@ from django.http import HttpResponse, HttpResponseRedirect
 from .models import *
 
 # Create your views here.
-def heros(request):
+def heroes(request):
     hero = Avengers.objects.all().order_by('id')
 
-    return render(request, 'avengers/heros.html', {'hero': hero})
+    return render(request, 'avengers/heroes.html', {'hero': hero})
 
 
 def layout(request):
