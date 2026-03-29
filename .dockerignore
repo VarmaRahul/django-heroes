@@ -1,0 +1,38 @@
+# Git
+.git
+.gitignore
+
+# Python/Django
+**/__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache
+.coverage
+htmlcov
+.mypy_cache
+
+# Environments
+.venv/
+venv/
+env/
+ENV/
+
+# Database
+# Note: Exclude this if you want a fresh DB in the container. 
+# Remove from list if you want to bake the existing 'db.sqlite3' into the image.
+db.sqlite3
+
+# Docker
+Dockerfile
+compose.yaml
+.dockerignore
+
+# IDE/Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS related
+.DS_Store
+Thumbs.db
