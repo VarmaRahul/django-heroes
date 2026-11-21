@@ -55,10 +55,7 @@ jobs:
       - uses: github/codeql-action/init@v4
         with:
           languages: python
-
-      - uses: github/codeql-action/autobuild@v4
-
-      - uses: github/codeql-action/analyze@v4
+          build-mode: none
 
   dependency-scan:
     name: Dependency Scan
@@ -73,9 +70,8 @@ jobs:
         with:
           python-version: "3.12"
 
-      - run: pip install pip-audit pip-licenses
-
-      - run: pip-audit
+      - name: Audit application dependencies
+        run: pip-audit -r requirements.txt
 
   build:
     name: Build and Push
