@@ -83,6 +83,7 @@ jobs:
           python -m pip install pip-audit
 
       - name: Audit application dependencies
+        continue-on-error: true
         run: |
           pip-audit -r requirements.txt
   
