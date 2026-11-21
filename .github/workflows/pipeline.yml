@@ -103,6 +103,22 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
+  sbom-source:
+    name: Generate Source SBOM
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Generate Source SBOM
+        uses: anchore/sbom-action@v0
+        with:
+          path: ./
+          format: cyclonedx-json
+          output-file: sbom-source.cdx.json
+          artifact-name: django-heroes-source-sbom
+
   build:
     name: Build and Push
     runs-on: ubuntu-latest
@@ -140,6 +156,15 @@ jobs:
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:latest
           # ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPO }}:latest
+      
+      - name: Generate Container Image SBOM
+        continue-on-error: true
+        uses: anchore/sbom-action@v0
+        with:
+          image: ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:latest
+          format: cyclonedx-json
+          output-file: sbom-image.cdx.json
+          artifact-name: django-heroes-image-sbom
 
       - name: Trivy Image Scan
         uses: aquasecurity/trivy-action@v0.36.0
