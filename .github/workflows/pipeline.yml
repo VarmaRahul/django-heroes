@@ -147,6 +147,7 @@ jobs:
       #   uses: aws-actions/amazon-ecr-login@v2
 
       - name: Build and push amd64 image
+        id: build-and-push
         uses: docker/build-push-action@v7
         with:
           context: .
@@ -175,3 +176,24 @@ jobs:
           format: table
           exit-code: '0'
           severity: CRITICAL,HIGH
+      
+      - name: Install Cosign
+        uses: sigstore/cosign-installer@v4
+      
+      - name: Sign Docker Image
+        continue-on-error: true
+        env:
+          IMAGE: ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}
+          DIGEST: ${{ steps.build-and-push.outputs.digest }}
+        run: |
+          cosign sign --yes "${IMAGE}@${DIGEST}"
+      
+      - name: Verify Docker Image Signature
+        continue-on-error: true
+        env:
+          IMAGE: ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}
+          DIGEST: ${{ steps.build-and-push.outputs.digest }}
+        run: |
+          cosign verify "${IMAGE}@${DIGEST}" \
+            --certificate-identity="https://github.com/${GITHUB_REPOSITORY}/.github/workflows/pipeline.yml@${GITHUB_REF}" \
+            --certificate-oidc-issuer="https://token.actions.githubusercontent.com"
