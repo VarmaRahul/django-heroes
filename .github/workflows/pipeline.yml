@@ -40,6 +40,30 @@ jobs:
           fetch-depth: 0
 
       - uses: gitleaks/gitleaks-action@v2
+  
+  dependency-scan:
+    name: Dependency Scan
+    runs-on: ubuntu-latest
+    continue-on-error: true
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Install pip-audit
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install pip-audit
+
+      - name: Audit application dependencies
+        continue-on-error: true
+        run: |
+          pip-audit -r requirements.txt
 
   sast-codeql:
     name: SAST (CodeQL)
@@ -81,30 +105,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install semgrep
           semgrep scan --config p/django --config p/python --error myproject/
-
-  dependency-scan:
-    name: Dependency Scan
-    runs-on: ubuntu-latest
-    continue-on-error: true
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-
-      - name: Setup Python
-        uses: actions/setup-python@v6
-        with:
-          python-version: "3.12"
-
-      - name: Install pip-audit
-        run: |
-          python -m pip install --upgrade pip
-          python -m pip install pip-audit
-
-      - name: Audit application dependencies
-        continue-on-error: true
-        run: |
-          pip-audit -r requirements.txt
   
   sonarqube:
     name: SonarQube Analysis
