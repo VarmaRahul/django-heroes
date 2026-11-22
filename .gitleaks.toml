@@ -1,0 +1,7 @@
+[allowlist]
+description = "Ignore virtual environments and third-party packages"
+paths = [
+  '''(^|/)\.venv/''',
+  '''(^|/)venv/''',
+  '''(^|/)site-packages/''',
+]
