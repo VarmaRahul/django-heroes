@@ -30,6 +30,19 @@ jobs:
         with:
           ignore: DL3008,DL3018,DL3059
 
+  checkov:
+    name: IaC & Config Scan (Checkov)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6.1.0
+
+      - name: Run Checkov
+        uses: bridgecrewio/checkov-action@master
+        with:
+          directory: .
+          framework: dockerfile,docker_compose,github_actions
+          soft_fail: true
+
   gitleaks:
     name: Secrets Scan
     runs-on: ubuntu-latest
@@ -141,7 +154,7 @@ jobs:
   build:
     name: Build and Push
     runs-on: ubuntu-latest
-    needs: [dockerfile-lint, gitleaks, sast-codeql, dependency-scan,sonarqube]
+    needs: [dockerfile-lint, checkov, gitleaks, dependency-scan, sast-codeql, semgrep, sonarqube]
     steps:
       - name: Checkout
         uses: actions/checkout@v6.1.0
