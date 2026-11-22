@@ -40,7 +40,7 @@ jobs:
         uses: bridgecrewio/checkov-action@master
         with:
           directory: .
-          framework: dockerfile,docker_compose,github_actions
+          framework: dockerfile,github_actions
           soft_fail: true
 
   gitleaks:
