@@ -8,8 +8,7 @@ WORKDIR /usr/src/app
 RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 
 COPY requirements.txt .
-RUN pip install --no-cache-dir --upgrade pip \
-    && pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
 COPY --chown=appuser:appgroup ./myproject /usr/src/app
 

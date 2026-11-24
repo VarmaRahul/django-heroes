@@ -1,4 +1,4 @@
-name: pipeline
+name: devsecops-pipeline
 
 on:
   push:
@@ -30,8 +30,6 @@ jobs:
           fetch-depth: 0
 
       - uses: hadolint/hadolint-action@v3.1.0
-        with:
-          ignore: DL3008,DL3018,DL3059
 
   checkov:
     name: IaC & Config Scan (Checkov)
