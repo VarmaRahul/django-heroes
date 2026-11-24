@@ -15,5 +15,9 @@ COPY --chown=appuser:appgroup ./myproject /usr/src/app
 USER appuser
 
 EXPOSE 8000
+
+HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
+  CMD python manage.py check
+  
 ENTRYPOINT ["python", "manage.py"]
 CMD ["runserver", "0.0.0.0:8000"]
