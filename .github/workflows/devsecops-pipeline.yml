@@ -158,7 +158,7 @@ jobs:
           output-file: sbom-source.cdx.json
           artifact-name: django-heroes-source-sbom
 
-  build:
+  build-push-image:
     name: Build and Push
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
@@ -253,3 +253,15 @@ jobs:
           cosign verify "${IMAGE}@${DIGEST}" \
             --certificate-identity="https://github.com/${GITHUB_REPOSITORY}/.github/workflows/pipeline.yml@${GITHUB_REF}" \
             --certificate-oidc-issuer="https://token.actions.githubusercontent.com"
+  
+  smoke-test:
+    name: Container Runtime Smoke Test
+    runs-on: ubuntu-latest
+    needs: [build-push-image]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6.1.0
+
+      - name: Run container smoke test
+        run: |
+          sh scripts/smoke_test.sh "${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:latest"

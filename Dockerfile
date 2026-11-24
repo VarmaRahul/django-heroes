@@ -1,14 +1,19 @@
 FROM python:3.12-alpine
 
-RUN rm -rf /var/lib/apt/lists/*
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1
 
 WORKDIR /usr/src/app
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
 
-ENV PYTHONUNBUFFERED=1
-COPY ./myproject .
-RUN chmod -R 755 /usr/src/app
+RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir --upgrade pip \
+    && pip install --no-cache-dir -r requirements.txt
+
+COPY --chown=appuser:appgroup ./myproject /usr/src/app
+
+USER appuser
 
 EXPOSE 8000
 ENTRYPOINT ["python", "manage.py"]
