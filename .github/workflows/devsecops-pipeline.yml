@@ -53,11 +53,11 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Gitleaks Scanner
-        uses: DariuszPorowski/github-action-gitleaks@v2.1.0
-        continue-on-error: true
+      - uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          report_format: json
+          args: detect --source . --report-format json --report-path gitleaks-report.json --redact --exit-code 1
 
   dependency-scan:
     name: Dependency Scan
