@@ -18,3 +18,6 @@ __pycache__/
 .coverage
 .coverage.*
 htmlcov/
+
+# Local database
+*.sqlite3
