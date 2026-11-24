@@ -246,15 +246,77 @@ jobs:
             --certificate-identity="https://github.com/${GITHUB_REPOSITORY}/.github/workflows/pipeline.yml@${GITHUB_REF}" \
             --certificate-oidc-issuer="https://token.actions.githubusercontent.com"
 
-  smoke-test:
-    name: Container Runtime Smoke Test
+  smoke-and-dast:
+    name: Smoke Test & OWASP ZAP DAST
     runs-on: ubuntu-latest
     needs: [build-push-image]
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    env:
+      IMAGE_REF: ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:latest
+      NET_NAME: smoke-dast-net
+      CONTAINER_NAME: smoke-django-heroes
     steps:
       - name: Checkout
         uses: actions/checkout@v6.1.0
 
       - name: Run container smoke test
         run: |
-          sh scripts/smoke_test.sh "${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:latest"
+          docker network create "${NET_NAME}"
+
+          docker run -d --name "${CONTAINER_NAME}" --network "${NET_NAME}" \
+            -e DJANGO_SETTINGS_MODULE="myproject.settings" \
+            -e SECRET_KEY="ci-smoke-dast-secret-key" \
+            -e DEBUG="1" \
+            -e ALLOWED_HOSTS="*" \
+            "${IMAGE_REF}"
+
+          CURRENT_USER=$(docker exec "${CONTAINER_NAME}" id -un)
+          echo "Container user: ${CURRENT_USER}"
+
+          docker exec "${CONTAINER_NAME}" python manage.py check
+
+          READY=0
+          for i in $(seq 1 20); do
+            if docker exec "${CONTAINER_NAME}" python -c \
+              "import urllib.request; req = urllib.request.Request('http://127.0.0.1:8000/', headers={'Host': 'localhost'}); resp = urllib.request.urlopen(req, timeout=2); print('HTTP status:', resp.status)" \
+              2>/dev/null; then
+              echo "Smoke check passed on attempt ${i}"
+              READY=1
+              break
+            fi
+            sleep 2
+          done
+
+          if [ "${READY}" -ne 1 ]; then
+            echo "ERROR: Django container did not become ready in time"
+            exit 1
+          fi
+
+      - name: Run OWASP ZAP baseline scan
+        run: |
+          REPORT_DIR="$(pwd)/zap-report"
+          mkdir -p "${REPORT_DIR}"
+          chmod 777 "${REPORT_DIR}"
+
+          docker run --rm --network "${NET_NAME}" \
+            -v "${REPORT_DIR}:/zap/wrk/:rw" \
+            ghcr.io/zaproxy/zaproxy:stable \
+            zap-baseline.py \
+            -t "http://${CONTAINER_NAME}:8000" \
+            -r zap-report.html \
+            -J zap-report.json \
+            -I
+
+      - name: Cleanup container and network
+        if: always()
+        run: |
+          docker logs "${CONTAINER_NAME}" 2>&1 || true
+          docker rm -f "${CONTAINER_NAME}" >/dev/null 2>&1 || true
+          docker network rm "${NET_NAME}" >/dev/null 2>&1 || true
+
+      - name: Upload ZAP DAST Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: django-heroes-zap-report
+          path: zap-report/
