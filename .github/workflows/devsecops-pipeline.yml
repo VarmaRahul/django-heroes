@@ -261,7 +261,7 @@ jobs:
           output-file: sbom-image.cdx.json
           artifact-name: django-heroes-image-sbom
 
-      - name: Trivy Image Scan
+      - name: Trivy Container Image Scan
         uses: aquasecurity/trivy-action@v0.36.0
         with:
           scan-type: image
