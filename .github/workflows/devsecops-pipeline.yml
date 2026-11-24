@@ -53,11 +53,13 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: gitleaks/gitleaks-action@v2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          args: detect --source . --report-format json --report-path gitleaks-report.json --redact --exit-code 1
+      - name: Run Gitleaks (JSON)
+        run: |
+          docker run --rm \
+            -v "$(pwd):/repo" \
+            -w /repo \
+            ghcr.io/gitleaks/gitleaks:latest \
+            detect --source . --report-format json --report-path gitleaks-report.json --redact --exit-code 1
 
   dependency-scan:
     name: Dependency Scan
