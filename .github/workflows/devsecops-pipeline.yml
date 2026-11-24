@@ -58,12 +58,11 @@ jobs:
         continue-on-error: true
         with:
           report_format: json
-  
+
   dependency-scan:
     name: Dependency Scan
     runs-on: ubuntu-latest
     continue-on-error: true
-
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -87,11 +86,9 @@ jobs:
     name: SAST (CodeQL)
     runs-on: ubuntu-latest
     continue-on-error: true
-
     permissions:
       contents: read
       security-events: write
-
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -123,11 +120,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install semgrep
           semgrep scan --config p/django --config p/python --error myproject/
-  
+
   sonarqube:
     name: SonarQube Analysis
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -143,7 +139,6 @@ jobs:
   sbom-source:
     name: Generate Source SBOM
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -160,7 +155,7 @@ jobs:
     name: Build and Push
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
-    needs: 
+    needs:
       - dockerfile-lint
       - checkov
       - gitleaks
@@ -168,12 +163,11 @@ jobs:
       - sast-codeql
       - semgrep
       - sonarqube
-      - sbom-source
-    
+
     permissions:
       contents: read
       id-token: write
-    
+
     steps:
       - name: Checkout
         uses: actions/checkout@v6.1.0
@@ -211,12 +205,12 @@ jobs:
             ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:latest
             ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
           # ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPO }}:latest
-      
+
       - name: Generate Container Image SBOM
         continue-on-error: true
         uses: anchore/sbom-action@v0
         with:
-          image: ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}@{{ steps.build-and-push.outputs.digest }}
+          image: ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}@${{ steps.build-and-push.outputs.digest }}
           format: cyclonedx-json
           output-file: sbom-image.cdx.json
           artifact-name: django-heroes-image-sbom
@@ -225,15 +219,15 @@ jobs:
         uses: aquasecurity/trivy-action@v0.36.0
         with:
           scan-type: image
-          image-ref: ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}@{{ steps.build-and-push.outputs.digest }}
+          image-ref: ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}@${{ steps.build-and-push.outputs.digest }}
           #image-ref: ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPO }}:latest
           format: table
           exit-code: '0'
           severity: CRITICAL,HIGH
-      
+
       - name: Install Cosign
         uses: sigstore/cosign-installer@v4.1.3
-      
+
       - name: Sign Docker Image
         continue-on-error: true
         env:
@@ -241,7 +235,7 @@ jobs:
           DIGEST: ${{ steps.build-and-push.outputs.digest }}
         run: |
           cosign sign --yes "${IMAGE}@${DIGEST}"
-      
+
       - name: Verify Docker Image Signature
         continue-on-error: true
         env:
@@ -251,11 +245,12 @@ jobs:
           cosign verify "${IMAGE}@${DIGEST}" \
             --certificate-identity="https://github.com/${GITHUB_REPOSITORY}/.github/workflows/pipeline.yml@${GITHUB_REF}" \
             --certificate-oidc-issuer="https://token.actions.githubusercontent.com"
-  
+
   smoke-test:
     name: Container Runtime Smoke Test
     runs-on: ubuntu-latest
     needs: [build-push-image]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     steps:
       - name: Checkout
         uses: actions/checkout@v6.1.0
