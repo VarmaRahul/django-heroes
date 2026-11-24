@@ -70,7 +70,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v6
         with:
-          python-version: "3.15"
+          python-version: "3.12"
 
       - name: Install pip-audit
         run: |
@@ -113,7 +113,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v6
         with:
-          python-version: "3.15"
+          python-version: "3.12"
 
       - name: Run Semgrep
         run: |
@@ -150,11 +150,10 @@ jobs:
           format: cyclonedx-json
           output-file: sbom-source.cdx.json
           artifact-name: django-heroes-source-sbom
-  
+
   unit-tests:
     name: Unit Tests & Coverage
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -162,7 +161,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v6
         with:
-          python-version: "3.15"
+          python-version: "3.12"
 
       - name: Install dependencies
         run: |
@@ -172,7 +171,7 @@ jobs:
 
       - name: Run Django tests with coverage
         run: |
-          coverage run --source='avengers' myproject/manage.py test avengers
+          coverage run --source='myproject/avengers' myproject/manage.py test avengers
           coverage report -m
 
       - name: Generate HTML coverage report
@@ -280,7 +279,7 @@ jobs:
           DIGEST: ${{ steps.build-and-push.outputs.digest }}
         run: |
           cosign verify "${IMAGE}@${DIGEST}" \
-            --certificate-identity="https://github.com/${GITHUB_REPOSITORY}/.github/workflows/pipeline.yml@${GITHUB_REF}" \
+            --certificate-identity="https://github.com/${GITHUB_REPOSITORY}/.github/workflows/devsecops-pipeline.yml@${GITHUB_REF}" \
             --certificate-oidc-issuer="https://token.actions.githubusercontent.com"
 
   smoke-and-dast:
