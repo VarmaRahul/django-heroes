@@ -33,7 +33,7 @@ jobs:
 
   checkov:
     name: IaC & Config Scan (Checkov)
-    runs-on: ubuntu-latest1
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6.1.0
 
