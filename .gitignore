@@ -1,13 +1,20 @@
-# Environments
+
+# Python virtual environments
 .venv/
 venv/
 env/
 
-# Python bytecode
+# Python bytecode and cache
+__pycache__/
 **/__pycache__/
 *.py[cod]
 *$py.class
 
 # Editor settings
-**/.vscode/
+.vscode/
 .idea/
+
+# Test and coverage artifacts
+.coverage
+.coverage.*
+htmlcov/
