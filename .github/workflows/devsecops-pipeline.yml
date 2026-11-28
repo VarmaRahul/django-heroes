@@ -4,9 +4,13 @@ on:
   push:
     branches:
       - main
+    paths-ignore:
+      - 'deployment/**'
   pull_request:
     branches:
       - main
+    paths-ignore:
+      - 'deployment/**'
   workflow_dispatch:
 
 permissions:
@@ -365,3 +369,36 @@ jobs:
         with:
           name: django-heroes-zap-report
           path: zap-report/
+
+  update-gitops-manifest:
+    name: Update GitOps Manifest (Argo CD)
+    runs-on: ubuntu-latest
+    needs: [smoke-and-dast]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6.1.0
+        with:
+          ref: main
+
+      - name: Update image tag in deployment.yaml
+        env:
+          DOCKERHUB_USER: ${{ secrets.DOCKERHUB_USERNAME }}
+          IMAGE_NAME: ${{ env.IMAGE_NAME }}
+          NEW_TAG: ${{ github.sha }}
+        run: |
+          sed -i "s|image: ${DOCKERHUB_USER}/${IMAGE_NAME}:.*|image: ${DOCKERHUB_USER}/${IMAGE_NAME}:${NEW_TAG}|g" deployment/k8s/deployment.yaml
+
+      - name: Commit and push updated manifest
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet deployment/k8s/deployment.yaml; then
+            echo "No changes to deployment.yaml"
+          else
+            git add deployment/k8s/deployment.yaml
+            git commit -m "chore(gitops): deploy image ${{ github.sha }}"
+            git push
+          fi

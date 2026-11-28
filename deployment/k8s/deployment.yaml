@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: django-heroes-deployment
+  namespace: project
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: django-heroes
+  template:
+    metadata:
+      labels:
+        app: django-heroes
+    spec:
+      containers:
+        - name: django-heroes
+          image: xedose/django-heroes:latest
+          ports:
+            - containerPort: 8000
