@@ -15,6 +15,6 @@ spec:
     spec:
       containers:
         - name: django-heroes
-          image: xedose/django-heroes:latest
+          image: xedose/django-heroes:8da0deb3165164a5cdbd88ed6123b97cebc8a03e
           ports:
             - containerPort: 8000
